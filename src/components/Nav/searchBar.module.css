@@ -1,0 +1,23 @@
+.searchContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.searchInput {
+  padding: 10px 150px;
+  border: 1px solid #00000052;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.searchButton {
+  border: 1px solid #00000052;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: yellow;
+  padding: 0 20px;
+}
+
+.searchButton:hover {
+  background-color: yellowgreen;
+}

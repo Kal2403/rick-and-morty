@@ -1,0 +1,45 @@
+.cardContainer {
+  overflow: hidden;
+  background-color: gray;
+  margin-top: 20px;
+  border-radius: 10px;
+  max-width: 300px;
+}
+
+.imageContainer {
+  position: relative;
+}
+
+.cardImg {
+  width: 100%;
+  display: block;
+}
+
+.cardNameContainer {
+  position: absolute;
+  top: 260px;
+  left: 10px;
+  background-color: yellow;
+  padding: 0 30px;
+  border-radius: 8px;
+}
+
+.cardName {
+  margin: 0;
+}
+
+.cardButton {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 5px 10px;
+  background-color: red;
+  border: none;
+  cursor: pointer;
+}
+
+.cardSpecieGenderContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
