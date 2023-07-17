@@ -2,10 +2,10 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import style from './nav.module.css';
 
-const Nav = () => {
+const Nav = (props) => {
   return (
     <div className={style.navContainer}>
-      <SearchBar />
+      <SearchBar onSearch={props.onSearch}/>
     </div>
   )
 }
