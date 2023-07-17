@@ -18,10 +18,15 @@ const App = () => {
   });
 }
 
+  const onClose = (id) => {
+    const updateCharacters = characters.filter((character) => parseInt(character.id) !== id);
+    setCharacters(updateCharacters);
+  }
+
   return (
     <div className="App">
       <Nav onSearch={onSearch}/>
-      <Cards characters={characters}/>
+      <Cards characters={characters} onClose={onClose}/>
     </div>
   );
 }

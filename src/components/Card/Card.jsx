@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './card.module.css';
 
-const Card = ({ name, species, gender, onClose, image, origin}) => {
+const Card = ({ name, species, gender, onClose, image, origin, id}) => {
   return (
     <div className={style.cardContainer}>
          <div className={style.imageContainer}>
@@ -9,7 +9,7 @@ const Card = ({ name, species, gender, onClose, image, origin}) => {
             <div className={style.cardNameContainer}>
                <h2 className={style.cardName}>{name}</h2>
             </div>
-            <button className={style.cardButton} onClick={onClose}>X</button>
+            <button className={style.cardButton} onClick={() => onClose(id)}>X</button>
          </div>
          <div className={style.cardSpecieGenderContainer}>
             <h2>{species}</h2>

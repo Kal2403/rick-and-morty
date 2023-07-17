@@ -9,9 +9,10 @@ const Cards = (props) => {
         props.characters.map((pj) => (
           <Card 
             key={pj.id}
+            id={pj.id}
             name={pj.name}
             species={pj.species}
-            onClose={() => window.alert('Emular')}
+            onClose={props.onClose}
             gender={pj.gender}
             origin={pj.origin.name}
             status={pj.status}
