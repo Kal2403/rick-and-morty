@@ -3,22 +3,25 @@ import Cards from './components/Cards/Cards.jsx';
 import Nav from './components/Nav/Nav';
 import About from './components/About/About';
 import Details from './components/Details/Details';
+import Form from './components/Form/Form';
 import { useState } from 'react';
 import axios from 'axios';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 const App = () => {
 
   const [characters, setCharacters] = useState([]);
 
- const onSearch = (id) => {
-  axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
-     if (data.name) {
-        setCharacters((oldChars) => [...oldChars, data]);
-     } else {
-        window.alert('¡No hay personajes con este ID!');
-     }
-  });
+  const { pathname } = useLocation();
+
+  const onSearch = (id) => {
+    axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+      if (data.name) {
+          setCharacters((oldChars) => [...oldChars, data]);
+      } else {
+          window.alert('¡No hay personajes con este ID!');
+      }
+    });
 }
 
   const onClose = (id) => {
@@ -28,8 +31,10 @@ const App = () => {
 
   return (
     <div className="App">
-      <Nav onSearch={onSearch}/>
+      { pathname !== '/' && <Nav onSearch={onSearch}/>}
       <Routes>
+   
+        <Route path='/' element={<Form />} />
 
         <Route path='/home' element={
           <Cards characters={characters} onClose={onClose}/>
