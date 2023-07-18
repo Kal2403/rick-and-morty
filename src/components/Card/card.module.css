@@ -24,9 +24,15 @@
   border-radius: 8px;
 }
 
+.cardLinkName {
+  text-decoration: none;
+  color: #000;
+}
+
 .cardName {
   margin: 0;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .cardButton {

@@ -1,3 +1,22 @@
 .navContainer {
   margin-top: 20px;
 }
+
+.navButtonsContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.btns {
+  padding: 8px 25px;
+  background-color: yellow;
+  border: 1px solid #00000052;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btns:hover {
+  background-color: yellowgreen;
+}

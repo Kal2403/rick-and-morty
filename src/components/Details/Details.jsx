@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import styled from './details.module.css'
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -21,7 +22,27 @@ const Details = () => {
  }, [id]);
 
   return (
-    <div>Soy el Details</div>
+    <>
+      {
+         character ? (
+            <div className={styled.detailsContainer}>
+               <div className={styled.descriptionContainer}>
+                  <h1 className={styled.detailsName}>{character.name}</h1>
+                  <div className={styled.descriptionContainer2}>
+                     <h3>STATUS | {character.status}</h3>
+                     <h3>GENDER | {character.gender}</h3>
+                     <h3>SPECIE | {character.species}</h3>
+                     <h3>ORIGIN | {character.origin?.name}</h3>
+                  </div>
+               </div>
+               <img className={styled.detailsImg} src={character.image} alt={character.name} />
+            </div>
+         )
+         : (
+            ""
+         )
+      }
+    </>
   )
 }
 

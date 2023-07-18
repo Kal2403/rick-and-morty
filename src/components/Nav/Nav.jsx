@@ -7,12 +7,15 @@ const Nav = (props) => {
   return (
     <div className={style.navContainer}>
       <SearchBar onSearch={props.onSearch}/>
-      <Link to='/About'>
-        <button>About</button>
-      </Link>
-      <Link to='/Home'>
-        <button>Home</button>
-      </Link>
+      <div className={style.navButtonsContainer}>
+        <Link to='/About'>
+          <button className={style.btns}>About</button>
+        </Link>
+        <Link to='/Home'>
+          <button className={style.btns}>Home</button>
+        </Link>
+      </div>
+      
     </div>
   )
 }

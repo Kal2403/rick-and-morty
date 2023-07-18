@@ -8,7 +8,7 @@ const Card = ({ name, species, gender, onClose, image, origin, id}) => {
          <div className={style.imageContainer}>
             <img className={style.cardImg} src={image} alt={name} />
             <div className={style.cardNameContainer}>
-               <Link to={`/details/${id}`}>
+               <Link className={style.cardLinkName} to={`/details/${id}`}>
                   <h2 className={style.cardName}>{name}</h2>
                </Link>
             </div>
