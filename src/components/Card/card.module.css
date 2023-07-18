@@ -26,6 +26,7 @@
 
 .cardName {
   margin: 0;
+  cursor: pointer;
 }
 
 .cardButton {
