@@ -1,30 +1,72 @@
 import React from 'react';
 import { useState } from 'react';
+import validation from './validation';
 
-const Form = () => {
+const Form = (props) => {
 
-  const [userData, setUserData] = useState({
+  const { login } = props;
+
+  const [ userData, setUserData ] = useState({
     email: "",
     password: ""
   })
 
+  const [ errors, setErrors ] = useState({});
+
   const handleChange = (event) => {
-    // setUserData({
-    //   ...userData,
-    //   [event.target.name]
-    // })
+    setUserData({
+      ...userData,
+      [event.target.name] : event.target.value
+    })
+    setErrors(validation({
+      ...userData,
+      [event.target.name] : event.target.value
+    }));
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    login(userData)
   }
 
   return (
-    <div>
-      <form action="">
-        <label htmlFor="email">Email</label>
-        <input name='email' type="text" />
-        <label htmlFor="password">Password</label>
-        <input type="password" onChange={handleChange} />
-        <button type='submit'>Submit</button>
+    <>
+      <form onSubmit={handleSubmit} >
+        <label>Email</label>
+        <input 
+          name="email"
+          type="email" 
+          onChange={handleChange} 
+          value={userData.email} 
+          placeholder="Enter email" />
+
+        {
+          errors.email ? (
+            <p>{errors.email}</p>
+          ) : errors.emailVacio ? (
+            <p>{errors.emailVacio}</p>
+          ) : (
+            <p>{errors.caracteres}</p>
+          )
+        }
+
+        <label>Password</label>
+        <input 
+          name="password" 
+          type="password" 
+          onChange={handleChange} 
+          value={userData.value} 
+          placeholder="Enter password" />
+
+        {
+          errors.password ? (
+            <p>{errors.password}</p>
+          ) : ""
+        }
+
+        <button type='submit' >Submit</button>
       </form>
-    </div>
+    </>
   )
 }
 
