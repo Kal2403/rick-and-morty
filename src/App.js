@@ -7,6 +7,7 @@ import Form from './components/Form/Form';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import Favorites from './components/Favorites/Favorites';
 
 const App = () => {
 
@@ -60,6 +61,8 @@ const App = () => {
         <Route path='/about' element={<About />} />
 
         <Route path='/details/:id' element={<Details/>} />
+
+        <Route path='/favorites' element={<Favorites/>} />
 
       </Routes>
     </div>

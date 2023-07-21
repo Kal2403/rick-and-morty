@@ -14,6 +14,9 @@ const Nav = (props) => {
         <Link to='/Home'>
           <button className={style.btns}>Home</button>
         </Link>
+        <Link to='/Favorites'>
+          <button className={style.btns}>Favorites</button>
+        </Link>
       </div>
       
     </div>
