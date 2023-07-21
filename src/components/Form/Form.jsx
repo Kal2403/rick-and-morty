@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import validation from './validation';
+import styled from './form.module.css';
+import loginImg from '../../img/login.jpg';
 
 const Form = (props) => {
 
@@ -30,43 +32,51 @@ const Form = (props) => {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit} >
-        <label>Email</label>
-        <input 
-          name="email"
-          type="email" 
-          onChange={handleChange} 
-          value={userData.email} 
-          placeholder="Enter email" />
+    <div className={styled.formContainer}>
+      <form className={styled.form} onSubmit={handleSubmit} >
+        <img className={styled.loginImg} src={loginImg} alt="loginRickandMorty" />
+        <div className={styled.emailContainer}>
+          <label className={styled.label}>Email</label>
+          <input
+            className={styled.input} 
+            name="email"
+            type="email" 
+            onChange={handleChange} 
+            value={userData.email} 
+            placeholder="Enter email" />
+        </div>
+        
 
         {
           errors.email ? (
-            <p>{errors.email}</p>
+            <p className={styled.errors}>{errors.email}</p>
           ) : errors.emailVacio ? (
-            <p>{errors.emailVacio}</p>
+            <p className={styled.errors}>{errors.emailVacio}</p>
           ) : (
-            <p>{errors.caracteres}</p>
+            <p className={styled.errors}>{errors.caracteres}</p>
           )
         }
-
-        <label>Password</label>
-        <input 
-          name="password" 
-          type="password" 
-          onChange={handleChange} 
-          value={userData.value} 
-          placeholder="Enter password" />
+        <div className={styled.passwordContainer}>
+          <label className={styled.label}>Password</label>
+          <input 
+            className={styled.input}
+            name="password" 
+            type="password" 
+            onChange={handleChange} 
+            value={userData.value} 
+            placeholder="Enter password" />
+        </div>
+        
 
         {
           errors.password ? (
-            <p>{errors.password}</p>
+            <p className={styled.errors}>{errors.password}</p>
           ) : ""
         }
 
-        <button type='submit' >Submit</button>
+        <button className={styled.btns} type='submit' >Submit</button>
       </form>
-    </>
+    </div>
   )
 }
 
