@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { connectm, useDispatch } from 'react-redux';
 import Card from '../Card/Card';
-import { removeFav } from '../../redux/actions';
+import { removeFav, orderCards, filterCards } from '../../redux/actions';
 
 const Favorites = ({ myFavorites, removeFav }) => {
 
@@ -28,6 +28,16 @@ const Favorites = ({ myFavorites, removeFav }) => {
           id={character.id}
         />
       ))}
+      <select>
+        <option value="A">Ascendente</option>
+        <option value="D">Descedente</option>
+      </select>
+      <select>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Genderless">Genderless</option>
+        <option value="unknown">Unknown</option>
+      </select>
     </div>
   )
 }
