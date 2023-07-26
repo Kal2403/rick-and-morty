@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { connectm, useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Card from '../Card/Card';
 import { removeFav, orderCards, filterCards } from '../../redux/actions';
+import styled from './favorites.module.css';
 
 const Favorites = ({ myFavorites, removeFav }) => {
 
   const [ favorites, setFavorites ] = useState(myFavorites);
+
+  const dispatch = useDispatch();
+
+  const [ aux, setAux ] = useState(false);
 
   const handleRemoveFavorite = (id) => {
     const updateFav = favorites.filter((character) => character.id !== id)
@@ -13,31 +18,47 @@ const Favorites = ({ myFavorites, removeFav }) => {
     removeFav(id.toString());
   }
 
+  const handleOrder = (e) => {
+    dispatch(orderCards(e.target.value));
+    setAux(!aux);
+  }
+
+  const handleFilter = (e) => {
+    dispatch(filterCards(e.target.value))
+  }
+
   return (
     <div>
+
       <h1>Mis Personajes Favoritos</h1>
-      {favorites.map((character) => (
-        <Card
-          key={character.id}
-          name={character.name}
-          species={character.species}
-          gender={character.gender}
-          onClose={() => handleRemoveFavorite(character.id)}
-          image={character.image}
-          origin={character.origin.name}
-          id={character.id}
-        />
-      ))}
-      <select>
-        <option value="A">Ascendente</option>
-        <option value="D">Descedente</option>
+
+      <select onChange={handleOrder}>
+        <option value="Ascendente">Ascendente</option>
+        <option value="Descedente">Descedente</option>
       </select>
-      <select>
+
+      <select onChange={handleFilter}>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Genderless">Genderless</option>
         <option value="unknown">Unknown</option>
       </select>
+      <div className={styled.cardContainer}>
+        {favorites.map((character) => (
+          <Card
+            key={character.id}
+            name={character.name}
+            species={character.species}
+            gender={character.gender}
+            onClose={() => handleRemoveFavorite(character.id)}
+            image={character.image}
+            origin={character.origin.name}
+            id={character.id}
+          />
+        ))}
+      </div>
+      
+      
     </div>
   )
 }
