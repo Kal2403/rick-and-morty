@@ -21,9 +21,9 @@ export const filterCards = (gender) => {
   }
 }
 
-export const orderCards = (id) => {
+export const orderCards = (order) => {
   return {
     type: ORDER,
-    payload: id
+    payload: order
   }
 }

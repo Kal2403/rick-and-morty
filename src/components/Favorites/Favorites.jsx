@@ -33,8 +33,8 @@ const Favorites = ({ myFavorites, removeFav }) => {
       <h1>Mis Personajes Favoritos</h1>
 
       <select onChange={handleOrder}>
-        <option value="Ascendente">Ascendente</option>
-        <option value="Descedente">Descedente</option>
+        <option value="A">Ascendente</option>
+        <option value="D">Descedente</option>
       </select>
 
       <select onChange={handleFilter}>
@@ -44,18 +44,20 @@ const Favorites = ({ myFavorites, removeFav }) => {
         <option value="unknown">Unknown</option>
       </select>
       <div className={styled.cardContainer}>
-        {favorites.map((character) => (
-          <Card
-            key={character.id}
-            name={character.name}
-            species={character.species}
-            gender={character.gender}
-            onClose={() => handleRemoveFavorite(character.id)}
-            image={character.image}
-            origin={character.origin.name}
-            id={character.id}
-          />
-        ))}
+        {myFavorites?.map((character) => {
+          return (
+            <Card
+              key={character.id}
+              name={character.name}
+              species={character.species}
+              gender={character.gender}
+              onClose={() => handleRemoveFavorite(character.id)}
+              image={character.image}
+              origin={character.origin.name}
+              id={character.id}
+            />
+          )
+        })}
       </div>
       
       

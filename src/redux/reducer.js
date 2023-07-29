@@ -1,70 +1,57 @@
 import { ADD_FAV, REMOVE_FAV, FILTER, ORDER } from "./types";
 
 const initialState = {
-    myFavorites: [],
-    allCharacters : [],
-    filterGender: null
+  myFavorites: [],
+  allCharacters: []
 }
 
 
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case ADD_FAV:
-            const copyCharacters = [...state.allCharacters, action.payload]
+  switch (action.type) {
+    case ADD_FAV:
+      let copyAllCharacters = [...state.allCharacters, action.payload];
 
-            return {
-                ...state,
-                myFavorites: copyCharacters,
-                allCharacters: [...copyCharacters]
-            }
-            
-        case REMOVE_FAV: 
-            return {
-                ...state,
-                myFavorites: state.myFavorites.filter((character)=> character.id !== action.payload )
-            }
+      return {
+        ...state,
+        myFavorites: copyAllCharacters,
+        allCharacters: [...copyAllCharacters]
+      }
 
-        case FILTER:
-            const filterCharacter = action.payload === "All" ? 
-                state.allCharacters : 
-                state.allCharacters.filter((character) => character.gender === action.payload)
+    case REMOVE_FAV:
+      return {
+        ...state,
+        myFavorites: state.myFavorites.filter((character) => character.id !== action.payload)
+      }
 
-            return {
-              ...state,
-              myFavorites: filterCharacter,
-              filterGender: action.payload // género filtrado en el estado
-            };
-      
-          case ORDER:
-            const characterOrder = state.filterGender === "All" ? 
-                [...state.allCharacters] : 
-                [...state.myFavorites]
-            
+    case FILTER:
+      let filterCharacter = state.allCharacters.filter((character) => character.gender === action.payload)
 
-            const sortCharacter = characterOrder.sort((a, b) => {
-              if (action.payload === "Ascendente") {
-                if (a.id < b.id) return -1
-                if (b.id < a.id) return 1 // b viene antes que a
-                return 0
+      return {
+        ...state,
+        myFavorites: filterCharacter
+      }
 
-              } 
-              else {
-                if (a.id < b.id) return 1
-                if (b.id < a.id) return -1
-                return 0
-              }
-            });
-      
-            return {
-              ...state,
-              myFavorites: sortCharacter, 
-            };
-    
-        default:
-            return {
-                ...state
-            }
-    }
+    case ORDER:
+      const characterOrder = state.allCharacters.sort((a, b) => {
+        if(action.payload === "A") {
+          if(a.id < b.id) return -1;
+          if(b.id < a.id) return 1;
+          return 0;
+        } else {
+          if(a.id < b.id) return 1;
+          if(b.id < a.id) return -1;
+          return 0;
+        }
+      })
+      return {
+        ...state,
+        myFavorites: [...characterOrder]
+      }
+    default:
+      return {
+        ...state
+      }
+  }
 }
 
 export default reducer
