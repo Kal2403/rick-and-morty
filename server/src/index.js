@@ -1,32 +1,17 @@
 const http = require("http");
+const { getCharById } = require("./controllers/getChartById")
 
 const PORT = 3001;
 
 const server = http.createServer((req, res) => {
-
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   if(req.url.includes('/rickandmorty/character')) {
-    const id = req.url.split('/').pop();
+    const urlParts = req.url.split('/');
+    const id = urlParts[urlParts.length - 1];
 
-    const data = require('./utils/data');
-
-    const character = data.find((character) => character.id === parseInt(id));
-
-    if(character) {
-      res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify(character));
-    } else {
-      res.statusCode = 404;
-      res.end(JSON.stringify({error: 'Personaje no encontrado'}))
-    }
-  } else {
-    res.statusCode = 404;
-    res.end(JSON.stringify({error: 'Ruta no valida'}))
+    getCharById(res, +id)
   }
-
 })
 
-server.listen(PORT, "localhost", () => {
-  console.log(`Server listening in port ${PORT}`);
-})
+server.listen(PORT, "localhost")
