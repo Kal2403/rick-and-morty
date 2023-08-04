@@ -14,8 +14,8 @@ const App = () => {
   const [characters, setCharacters] = useState([]);
 
   const [access, setAccess] = useState(false);
-  const EMAIL = 'kal2403199255@gmail.com';
-  const PASSWORD = 'google2403';
+  // const EMAIL = 'kal2403199255@gmail.com';
+  // const PASSWORD = 'google2403';
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -30,11 +30,14 @@ const App = () => {
     });
   }
 
-  const login = (userData) => {
-    if(userData.password === PASSWORD && userData.email === EMAIL) {
-      setAccess(true)
-      navigate('./home');
-    }
+  function login(userData) {
+    const { email, password } = userData;
+    const URL = 'http://localhost:3001/rickandmorty/login/';
+    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+       const { access } = data;
+       setAccess(data);
+       access && navigate('/home');
+    });
   }
 
   useEffect(() => {

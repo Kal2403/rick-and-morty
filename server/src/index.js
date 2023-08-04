@@ -1,17 +1,26 @@
-const http = require("http");
-const { getCharById } = require("./controllers/getChartById")
-
+const express = require('express');
+const server = express();
+const router = require("./routes/index")
+const cors = require("cors")
 const PORT = 3001;
 
-const server = http.createServer((req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+server.use(cors())
 
-  if(req.url.includes('/rickandmorty/character')) {
-    const urlParts = req.url.split('/');
-    const id = urlParts[urlParts.length - 1];
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header(
+     'Access-Control-Allow-Headers',
+     'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header(
+     'Access-Control-Allow-Methods',
+     'GET, POST, OPTIONS, PUT, DELETE'
+  );
+  next();
+});
 
-    getCharById(res, +id)
-  }
-})
+server.use(express.json());
+server.use("/rickandmorty", router);
 
-server.listen(PORT, "localhost")
+server.listen(PORT, () => console.log(`Server levantador en el puerto ${PORT}`));
